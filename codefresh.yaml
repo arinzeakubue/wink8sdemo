@@ -1,0 +1,21 @@
+version: '1.0'
+steps:
+    
+  BuildDockerImage:
+    title: Building Docker Image
+    type: build
+    image_name: aspnetmvcapp
+    working_directory: ${{main_clone}}/aspnetmvcapp
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+    dockerfile: ./Dockerfile
+    
+  DeployToK8:
+    title: Deploying to the cluster
+    type: deploy
+    kind: kubernetes
+    cluster: jdwink8s
+    namespace: default
+    service: aspnetmvcapp
+    candidate: 
+      image: ${{BuildDockerImage}}
+      registry: cfcr  
