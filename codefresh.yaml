@@ -6,7 +6,7 @@ steps:
     type: build
     image_name: aspnetmvcapp
     working_directory: ${{main_clone}}/aspnetmvcapp
-    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
     dockerfile: ./Dockerfile
     
   DeployToK8:
